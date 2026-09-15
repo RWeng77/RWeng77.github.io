@@ -1,0 +1,68 @@
+<!-- Hidden "Miku" skin. Toggle: type "miku" on the page, open a URL with #miku / #nomiku, or run Miku.off() in the console. -->
+<script>
+  (function () {
+    var KEY = 'miku';
+    var SEQ = 'miku';
+    var root = document.documentElement;
+    var buf = '';
+    var fixedTheme = window.Theme && window.Theme.isToggleable === false ? root.getAttribute('data-bs-theme') : null;
+
+    function stored() {
+      try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; }
+    }
+
+    function userTheme() {
+      if (fixedTheme) return fixedTheme;
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t === 'dark' || t === 'light') return t;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function apply(enabled) {
+      if (enabled) {
+        root.setAttribute('data-miku', '');
+        root.setAttribute('data-bs-theme', 'dark');
+      } else {
+        root.removeAttribute('data-miku');
+        root.setAttribute('data-bs-theme', userTheme());
+      }
+    }
+
+    function set(enabled) {
+      try { enabled ? localStorage.setItem(KEY, '1') : localStorage.removeItem(KEY); } catch (e) {}
+      apply(enabled);
+    }
+
+    function handleHash() {
+      var h = location.hash;
+      if (h !== '#miku' && h !== '#nomiku') return false;
+      set(h === '#miku');
+      history.replaceState(null, '', location.pathname + location.search);
+      return true;
+    }
+
+    if (!handleHash()) apply(stored());
+
+    window.addEventListener('hashchange', handleHash);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing || !e.key || e.key.length !== 1) return;
+      var t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      buf = (buf + e.key.toLowerCase()).slice(-SEQ.length);
+      if (buf === SEQ) { buf = ''; set(!stored()); }
+    }, true);
+
+    window.addEventListener('message', function (e) {
+      if (e.data && e.data.id === 'theme-updated' && stored()) root.setAttribute('data-bs-theme', 'dark');
+    });
+
+    window.Miku = {
+      on: function () { set(true); },
+      off: function () { set(false); },
+      toggle: function () { set(!stored()); },
+      get active() { return stored(); }
+    };
+  })();
+</script>

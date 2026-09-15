@@ -1,0 +1,196 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+
+/* Colour overrides. Variable names: see _sass/themes/_light.scss and
+ * _dark.scss inside the jekyll-theme-chirpy gem (`bundle show jekyll-theme-chirpy`). */
+
+@mixin light-colors {
+  /* --main-bg: #ffffff; */
+  /* --sidebar-bg: #f6f8fa; */
+  /* --link-color: #0056b2; */
+}
+
+@mixin dark-colors {
+  /* --main-bg: rgb(27 27 30); */
+  /* --sidebar-bg: #1e1e1e; */
+  /* --link-color: rgb(138 180 248); */
+}
+
+:root,
+:root[data-bs-theme='light'] {
+  @include light-colors;
+}
+
+:root[data-bs-theme='dark'] {
+  @include dark-colors;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-bs-theme]) {
+    @include dark-colors;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Hidden "Miku" skin. Toggled by _includes/metadata-hook.html (type "miku",
+ * or open a URL with #miku). Palette: color-hex.com/color-palette/19601.
+ * Font: Fusion Pixel 12px (OFL) — assets/fonts/OFL-fusion-pixel.txt.
+ * Must stay last in this file so it wins over the light/dark blocks above.
+ * ------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Fusion Pixel';
+  src: url('/assets/fonts/fusion-pixel-12px-zh_hant.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+$miku-grey: #373b3e;
+$miku-grey-deep: #2d3134;
+$miku-grey-line: #4a5054;
+$miku-silver: #bec8d1;
+$miku-silver-muted: #8e9aa3;
+$miku-teal: #86cecb;
+$miku-teal-deep: #137a7f;
+$miku-pink: #e12885;
+
+:root[data-miku] {
+  color-scheme: dark;
+
+  /* Framework */
+  --main-bg: #{$miku-grey};
+  --mask-bg: #{$miku-teal-deep};
+  --main-border-color: #{$miku-grey-line};
+
+  /* Common */
+  --text-color: #{$miku-silver};
+  --text-muted-color: #{$miku-silver-muted};
+  --text-muted-highlight-color: #{$miku-silver};
+  --heading-color: #{$miku-teal};
+  --label-color: #{$miku-silver};
+  --blockquote-border-color: #{$miku-teal-deep};
+  --blockquote-text-color: #{$miku-silver-muted};
+  --link-color: #{$miku-teal};
+  --link-underline-color: #{$miku-teal-deep};
+  --button-bg: #{$miku-grey-deep};
+  --btn-border-color: #{$miku-teal-deep};
+  --btn-backtotop-color: #{$miku-teal};
+  --btn-backtotop-border-color: #{$miku-teal-deep};
+  --card-header-bg: #{$miku-grey-deep};
+  --checkbox-color: #{$miku-silver-muted};
+  --checkbox-checked-color: #{$miku-pink};
+  --img-bg: radial-gradient(circle, #{$miku-grey-deep} 0%, #{$miku-grey} 100%);
+  --shimmer-bg: linear-gradient(
+    90deg,
+    rgb(134 206 203 / 0%) 0%,
+    rgb(134 206 203 / 25%) 50%,
+    rgb(134 206 203 / 0%) 100%
+  );
+
+  /* Sidebar */
+  --site-title-color: #{$miku-teal};
+  --site-subtitle-color: #{$miku-pink};
+  --sidebar-bg: #{$miku-grey-deep};
+  --sidebar-border-color: #{$miku-teal-deep};
+  --sidebar-muted-color: #{$miku-silver-muted};
+  --sidebar-active-color: #{$miku-teal};
+  --sidebar-hover-bg: rgb(134 206 203 / 12%);
+  --sidebar-btn-bg: #{$miku-grey};
+  --sidebar-btn-color: #{$miku-teal};
+  --avatar-border-color: #{$miku-teal};
+
+  /* Topbar */
+  --topbar-bg: rgb(55 59 62 / 80%);
+  --topbar-text-color: #{$miku-silver};
+  --search-border-color: #{$miku-teal-deep};
+  --search-icon-color: #{$miku-teal};
+  --input-focus-border-color: #{$miku-pink};
+
+  /* Home */
+  --post-list-text-color: #{$miku-silver};
+  --btn-patinator-text-color: #{$miku-silver};
+  --btn-paginator-hover-color: #{$miku-teal-deep};
+
+  /* Posts */
+  --toc-highlight: #{$miku-pink};
+  --toc-popup-border-color: #{$miku-teal-deep};
+  --tag-hover: #{$miku-teal-deep};
+  --tb-odd-bg: #{$miku-grey-deep};
+  --tb-even-bg: #{$miku-grey};
+  --tb-border-color: #{$miku-teal-deep};
+  --footnote-target-bg: #{$miku-teal-deep};
+  --btn-share-color: #{$miku-silver-muted};
+  --btn-share-hover-color: #{$miku-pink};
+  --card-bg: #{$miku-grey-deep};
+  --card-hover-bg: #{$miku-teal-deep};
+  --kbd-wrap-color: #{$miku-teal-deep};
+  --kbd-text-color: #{$miku-silver};
+  --kbd-bg-color: #{$miku-grey-deep};
+  --prompt-text-color: #{$miku-silver};
+  --prompt-tip-bg: rgb(19 122 127 / 40%);
+  --prompt-tip-icon-color: #{$miku-teal};
+  --prompt-info-bg: rgb(134 206 203 / 20%);
+  --prompt-info-icon-color: #{$miku-teal};
+  --prompt-warning-bg: rgb(225 40 133 / 20%);
+  --prompt-warning-icon-color: #{$miku-pink};
+  --prompt-danger-bg: rgb(225 40 133 / 30%);
+  --prompt-danger-icon-color: #{$miku-pink};
+
+  /* Tags / categories / archives */
+  --tag-border: #{$miku-teal-deep};
+  --tag-shadow: #{$miku-grey-deep};
+  --dash-color: #{$miku-grey-line};
+  --search-tag-bg: #{$miku-grey-deep};
+  --categories-border: #{$miku-teal-deep};
+  --categories-hover-bg: #{$miku-teal-deep};
+  --categories-icon-hover-color: #{$miku-pink};
+  --timeline-node-bg: #{$miku-teal};
+  --timeline-color: #{$miku-teal-deep};
+  --timeline-year-dot-color: #{$miku-pink};
+
+  /* Code */
+  --language-border-color: #{$miku-teal-deep};
+  --highlight-bg-color: #{$miku-grey-deep};
+  --highlighter-rouge-color: #{$miku-teal};
+  --highlight-lineno-color: #{$miku-silver-muted};
+  --inline-code-bg: rgb(134 206 203 / 10%);
+  --code-color: #{$miku-silver};
+  --code-header-text-color: #{$miku-silver-muted};
+  --code-header-muted-color: #{$miku-grey-line};
+  --code-header-icon-color: #{$miku-teal};
+  --clipboard-checked-color: #{$miku-teal};
+  --filepath-text-color: #{$miku-silver};
+
+  /* 8-bit font everywhere except icon glyphs (Font Awesome sets its own family). */
+  body,
+  h1, h2, h3, h4, h5, h6,
+  .site-title, .site-subtitle,
+  input, button, select, textarea, .btn,
+  code, pre, kbd, samp,
+  .highlight, .highlighter-rouge {
+    font-family: 'Fusion Pixel', 'Microsoft Yahei', monospace;
+  }
+
+  body {
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+  }
+
+  #avatar img {
+    image-rendering: pixelated;
+  }
+}
