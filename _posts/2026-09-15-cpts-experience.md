@@ -1,7 +1,7 @@
 ---
 title: "CPTS 心得"
 date: 2026-09-15 00:00:00 +0800
-categories: [Writeup]
+categories: [Certification]
 tags: [CPTS, HTB, certification, pentesting]
 ---
 
