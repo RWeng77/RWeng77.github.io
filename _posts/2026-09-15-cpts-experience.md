@@ -5,7 +5,7 @@ categories: [Certification]
 tags: [CPTS, HTB, certification, pentesting]
 ---
 
-# CPTS 心得   
+  
 ## 前言   
 這篇心得都是自己的想法，並沒有使用生成式 AI 進行任何修正或潤飾，有任何資訊錯誤或有問題的地方還請見諒   
    
