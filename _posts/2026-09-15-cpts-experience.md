@@ -103,4 +103,5 @@ tags: [CPTS, HTB, certification, pentesting]
 > Again, congratulations on a job well done, and feel free to show off your hard-earned certificate!
 >
 > Thank you, William Moody (@bmdyy)
+
 廢話有點多XD 差不多分享到這邊吧！   
